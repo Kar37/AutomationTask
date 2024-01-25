@@ -5,8 +5,9 @@ from selenium.webdriver.common.by import By
 import pytest
 
 from mock_constants.constants import BASEURL
-from mock_constants.user_data import USER_EMAIL, USER_PASSWORD
-from mock_constants.locators import USERNAME_LOCATOR_ID, PASSWORD_LOCATOR_ID, LOGIN_BUTTON_LOCATOR_ID
+from mock_constants.user_data import USER_EMAIL, USER_PASSWORD, FIRST_NAME, LAST_NAME, POSTAL_CODE
+from mock_constants.locators import (USERNAME_LOCATOR_ID, PASSWORD_LOCATOR_ID, LOGIN_BUTTON_LOCATOR_ID,
+                                     CHECKOUT_FIRST_NAME_ID, CHECKOUT_LAST_NAME_ID, CHECKOUT_POSTAL_CODE_NAME_ID)
 
 
 class BaseClass:
@@ -15,6 +16,14 @@ class BaseClass:
         driver.find_element(By.ID, USERNAME_LOCATOR_ID).send_keys(username)
         driver.find_element(By.ID, PASSWORD_LOCATOR_ID).clear()
         driver.find_element(By.ID, PASSWORD_LOCATOR_ID).send_keys(password)
+
+    def fill_checkout_credentials(self, logged_driver, firstname, lastname, postalcode):
+        logged_driver.find_element(By.ID, CHECKOUT_FIRST_NAME_ID).clear()
+        logged_driver.find_element(By.ID, CHECKOUT_FIRST_NAME_ID).send_keys(firstname)
+        logged_driver.find_element(By.ID, CHECKOUT_LAST_NAME_ID).clear()
+        logged_driver.find_element(By.ID, CHECKOUT_LAST_NAME_ID).send_keys(lastname)
+        logged_driver.find_element(By.ID, CHECKOUT_POSTAL_CODE_NAME_ID).clear()
+        logged_driver.find_element(By.ID, CHECKOUT_POSTAL_CODE_NAME_ID).send_keys(postalcode)
 
     def click(self, driver, locator, value):
         driver.find_element(locator, value).click()
